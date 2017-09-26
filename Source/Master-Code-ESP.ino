@@ -6,6 +6,31 @@ Project: RoofTopGarden */
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include "HTTPSRedirect.h"
+#include <ESP8266WiFi.h>
+#include <WifiUDP.h>
+#include <String.h>
+#include <Wire.h>
+#include <NTPClient.h>
+#include <Time.h>
+#include <TimeLib.h>
+#include <Timezone.h>
+
+
+
+// Define NTP properties
+#define NTP_OFFSET   60 * 60      // In seconds
+#define NTP_INTERVAL 60 * 1000    // In miliseconds
+#define NTP_ADDRESS  "ca.pool.ntp.org"  // change this to whatever pool is closest (see ntp.org)
+
+// Set up the NTP UDP client
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, NTP_ADDRESS, NTP_OFFSET, NTP_INTERVAL);
+
+String date;
+String t;
+const char * days[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"} ;
+const char * months[] = {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"} ;
+const char * ampm[] = {"AM", "PM"} ;
 
 #define ID1 "5890e3fc76254253b40c38b5" // temp sensor
 #define ID2 "588baa1e762542036842ef85" // float sensor
@@ -42,7 +67,7 @@ int oldvalue;
 unsigned long timeoldvalue = 0;
 int oldoldvalue = 0;
 
-unsigned long t = 0;
+unsigned long t1 = 0;
 
 // The ID below comes from Google Sheets.
 // Towards the bottom of this page, it will explain how this can be obtained
@@ -66,6 +91,11 @@ void setup() {
   Serial.begin(115200);
   delay(10);
   //Connect the ESP to the Wifi
+  timeClient.begin();   // Start the NTP UDP client
+
+  Wire.pins(0, 2);  // Start the OLED with GPIO 0 and 2 on ESP-01
+  Wire.begin(0, 2); // 0=sda, 2=scl
+  
   client1.wifiConnection(WIFISSID, PASSWORD);
   //Declare what each pin will do 
   pinMode(D2, INPUT_PULLUP);
@@ -159,9 +189,10 @@ void loop() {
 
   postData(value, value2, phValue);
 
-  
-  checkTime();
-  
+
+  //checkTime();
+  checkRealtime();
+
 }
 
 float getTemp(){
@@ -181,18 +212,69 @@ phValue = phValue++;//convert the millivolt into pH value
 }
 
 void checkTime(){ // fisx this first if statement, maybe sending high and low 
-  t = millis() - timeoldvalue;
-  if(t > 120000 /*&& superoldvalue == 0*/){
+  t1 = millis() - timeoldvalue;
+  if(t1 > 120000 /*&& superoldvalue == 0*/){
     digitalWrite(D8, HIGH);
     Serial.println("Feeding...");
     //digitalWrite(D8, LOW);
     //superoldvalue = 1;
   }
-  if(t> 125000){
+  if(t1> 125000){
     timeoldvalue = millis();
     digitalWrite(D8, LOW);
     Serial.println("Stop Feeding...");
     //superoldvalue = 0;
   }
 }
+void checkRealtime(){
+  date = "";  // clear the variables
+    t = "";
+    
+    // update the NTP client and get the UNIX UTC timestamp 
+    timeClient.update();
+    unsigned long epochTime =  timeClient.getEpochTime();
 
+    // convert received time stamp to time_t object
+    time_t local, utc;
+    utc = epochTime;
+
+    // Then convert the UTC UNIX timestamp to local time
+    TimeChangeRule usEDT = {"EDT", Second, Sun, Mar, 2, -600};  //UTC - 5 hours - change this as needed
+    TimeChangeRule usEST = {"EST", First, Sun, Nov, 2, -660};   //UTC - 6 hours - change this as needed
+    Timezone usEastern(usEST, usEST);
+    local = usEastern.toLocal(utc);
+
+    // now format the Time variables into strings with proper names for month, day etc
+    date += days[weekday(local)-1];
+    date += ", ";
+    date += months[month(local)-1];
+    date += " ";
+    date += day(local);
+    date += ", ";
+    date += year(local);
+
+    // format the time to 12-hour format with AM/PM and no seconds
+    t += hourFormat12(local);
+    t += ":";
+    if(minute(local) < 10)  // add a zero if minute is under 10
+      t += "0";
+    t += minute(local);
+    t += " ";
+    t += ampm[isPM(local)];
+
+    // Display the date and time
+    /*Serial.println("");
+    Serial.print("Local date: ");
+    Serial.print(date);
+    Serial.println("");
+    Serial.print("Local time: ");
+    Serial.print(t);*/
+    //if(minute(local) % 2 == 0){
+    if(t == "3:00 AM" ||t == "3:00 PM"){
+    digitalWrite(D8, HIGH);
+    Serial.println("Feeding...");
+    }
+    else{
+    digitalWrite(D8, LOW);
+    Serial.println("Stop Feeding...");}
+}
