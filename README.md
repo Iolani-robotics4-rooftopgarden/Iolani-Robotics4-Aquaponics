@@ -12,7 +12,7 @@ These are the supplies needed to recreate this project:
 * ESP8266 which can be found here: [ESP8266 NodeMCU]( https://www.amazon.com/HiLetgo-Version-NodeMCU-Internet-Development/dp/B010O1G1ES/ref=sr_1_3?s=electronics&ie=UTF8&qid=1505504360&sr=1-3&keywords=esp8266)
 * Temperature sensor which can be found here: [Temperature Sensor](https://www.sparkfun.com/products/11050)
 * Arduino Uno which can be found here: [Arduino](https://www.amazon.com/MakerBest-Quality-Compatible-ATmega328P-Development/dp/B00Q6ZW4NO/ref=sr_1_7?s=electronics&ie=UTF8&qid=1505504649&sr=1-7&keywords=arduino+uno)
-* Water level sensor which can be found here: [Waterh Level Sensor](https://www.amazon.com/uxcell-Pieces-ZP4510-Vertical-Switches/dp/B00FHAEBIA/ref=sr_1_3?s=industrial&ie=UTF8&qid=1505504811&sr=1-3&keywords=float+sensor)
+* Water level sensor which can be found here: [Water Level Sensor](https://www.amazon.com/uxcell-Pieces-ZP4510-Vertical-Switches/dp/B00FHAEBIA/ref=sr_1_3?s=industrial&ie=UTF8&qid=1505504811&sr=1-3&keywords=float+sensor)
 * RTC "Real Time Clock" which can be found here: [RTC](https://www.amazon.com/DS3231-AT24C32-module-precision-Arduino/dp/B00HCB7VYS)
 
 ### Prerequisites
