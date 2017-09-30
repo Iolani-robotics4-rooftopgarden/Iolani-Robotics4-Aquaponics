@@ -1,4 +1,4 @@
-#include <UbidotsMicroESP8266.h>
+ #include <UbidotsMicroESP8266.h>
 
 /* This Master code incorporates the float sensors, temperature sensors, and fish feeder control in order
 to gather data that can be used to monitor the aquaponics system on 4th floor Sullivan. Created by Shane and Matthew
@@ -120,6 +120,7 @@ void setup() {
   pinMode(D3, INPUT_PULLUP);
   pinMode(D7, INPUT_PULLUP);
   pinMode(D5, INPUT_PULLUP);
+  pinMode(D0, INPUT);
   pinMode(D8, OUTPUT);
 
 }
@@ -164,7 +165,7 @@ void loop() {
   fv3 = digitalRead(lvl3);
   fv4 = digitalRead(lvl4);
   waterlevel();
-  getpH();
+  //getpH();
   float value2 = getTemp();
   value3 = client1.getValue(ID3);
   Serial.println(value3);
@@ -180,6 +181,14 @@ void loop() {
     Serial.println("did not go through");
     digitalWrite(D8, LOW);
     oldoldvalue = 0;
+  }
+  if(digitalRead(D0) == HIGH){
+    phValue = 1;
+    Serial.println("High");
+  }
+  else{
+    phValue = 0;
+    Serial.println("Low");
   }
   client1.add(ID1, value);
   client1.add(ID2, value2);
@@ -205,11 +214,11 @@ float getTemp(){
 
 
 
-void getpH(){
+/*void getpH(){
 float phValue=analogRead(SensorPin)*5.0/1024; //convert the analog into millivolt
 phValue=3.5*phValue;
 phValue = phValue++;//convert the millivolt into pH value
-}
+}*/
 
 void checkTime(){ // fisx this first if statement, maybe sending high and low 
   t1 = millis() - timeoldvalue;
@@ -278,3 +287,4 @@ void checkRealtime(){
     digitalWrite(D8, LOW);
     Serial.println("Stop Feeding...");}
 }
+
