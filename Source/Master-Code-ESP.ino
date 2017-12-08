@@ -1,4 +1,6 @@
- #include <Servo.h>
+#include <HTTPSRedirect.h>
+
+#include <Servo.h>
 
 #include <UbidotsMicroESP8266.h>
 
@@ -8,7 +10,6 @@ to gather data that can be used to monitor the aquaponics system on 4th floor Su
 Project: RoofTopGarden */
 #include <OneWire.h>
 #include <DallasTemperature.h>
-#include "HTTPSRedirect.h"
 #include <ESP8266WiFi.h>
 #include <WifiUDP.h>
 #include <String.h>
@@ -54,7 +55,7 @@ Ubidots client1(TOKEN);
 //float values for the code
 float value;
 float value3;
-float phValue;
+float flapSafety;
 
 //integer values for the code
 int lvl1 = D2;
@@ -67,6 +68,7 @@ int fv2;
 int fv3;
 int fv4;
 int oldvalue;
+boolean runCheck = false;
 unsigned long timeoldvalue = 0;
 int oldoldvalue = 0;
 
@@ -77,7 +79,7 @@ Servo ff;
 int timeSafety;
 int IR = D0;
 int val;
-/*
+
 // The ID below comes from Google Sheets.
 // Towards the bottom of this page, it will explain how this can be obtained
 const char *GScriptId = "AKfycbyADaLgXg7z5jGJZCI5vA0eaqvZslhVr2qLIveNxy4ULRgCpb40";
@@ -92,7 +94,7 @@ HTTPSRedirect client(httpsPort);
 String url = String("/macros/s/") + GScriptId + "/exec?";
 
 const char* fingerprint = "F0 5C 74 77 3F 6B 25 D7 3B 66 4D 43 2F 7E BC 5B E9 28 86 AD";
-*/
+
 
 void setup() {
   // Put your setup code here, to run once:
@@ -109,7 +111,7 @@ void setup() {
   client1.wifiConnection(WIFISSID, PASSWORD);
   //Declare what each pin will do 
   pinMode(D2, INPUT_PULLUP);
-/*
+
   bool flag = false;
   for (int i=0; i<5; i++){
     int retval = client.connect(host, httpsPort);
@@ -127,7 +129,7 @@ void setup() {
     Serial.flush();
     return;
   }
-  */
+  
   
   pinMode(D3, INPUT_PULLUP);
   pinMode(D7, INPUT_PULLUP);
@@ -164,7 +166,7 @@ if(fv4 == 1){
     value = 4;
   }
 }
-/*
+
 void postData(float fsensor, float temps, float pHs){
   if (!client.connected()){
     Serial.println("Connecting to client again..."); 
@@ -175,7 +177,7 @@ void postData(float fsensor, float temps, float pHs){
   client.printRedir(urlFinal, host, googleRedirHost);
   
 }
-*/
+
 
 void loop() {
   // put your main code here, to run repeatedly:
@@ -214,24 +216,15 @@ void loop() {
     oldoldvalue = 0;
   }
   */
-  if(digitalRead(D0) == HIGH){
-    phValue = 1;
-    Serial.println("High");
-  }
-  else{
-    phValue = 0;
-    Serial.println("Low");
-  }
+  
   client1.add(ID1, value);
   client1.add(ID2, value2);
-  client1.add(ID4, phValue); 
+  client1.add(ID4, flapSafety); 
   client1.sendAll();
 
 
-  //postData(value, value2, phValue);
+  postData(value, value2, flapSafety);
 
-
-  //checkTime();
   checkRealtime();
 
 }
@@ -303,9 +296,9 @@ void checkRealtime(){
     Serial.print("Local time: ");
     Serial.print(t);*/
     //if(minute(local) % 2 == 0){
-    if(t == "8:00 AM" ||t == "3:00 PM"){
-      
-   while (val <= 1 && timeSafety <= 5000 ){
+    if((t == "8:00 AM" ||t == "4:00 PM") && runCheck == false){
+    //if((t == "2:32 PM" ||t == "3:02 PM"||t == "3:00 PM"||t == "2:59 PM"||t == "2:36 PM"||t == "2:38 PM"||t == "2:40 PM") && runCheck == false){
+   while (val == 0 && timeSafety <= 7000){
       val = digitalRead(IR);
       ff.write(63);
       Serial.println("Feeding...");
@@ -313,8 +306,17 @@ void checkRealtime(){
       Serial.println(timeSafety);
       delay(1);
       }
+      delay(350);
       ff.write(90);
       timeSafety = 0;
+      delay(4000);
+      val = digitalRead(IR);
+      if(val == 1){
+        flapSafety = 1;
+      }
+      else{
+        flapSafety = 0;
+      }
       /*
       ff.write(63);
       delay(250);
@@ -323,8 +325,11 @@ void checkRealtime(){
       */
     oldoldvalue= 1;
     Serial.println("Feeding...");
-    }
+    runCheck = true;
+    delay(60000);
+    }else if(t == "8:00 AM" ||t == "4:00 PM"){}
     else{
     ff.write(90);
-    Serial.println(t);}
+    Serial.println(t);
+    runCheck = false;}
 }
