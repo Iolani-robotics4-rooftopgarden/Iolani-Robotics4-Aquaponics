@@ -295,28 +295,30 @@ void checkRealtime(){
     Serial.println("");
     Serial.print("Local time: ");
     Serial.print(t);*/
-    //if(minute(local) % 2 == 0){
-    if((t == "8:00 AM" ||t == "4:00 PM") && runCheck == false){
-    //if((t == "2:32 PM" ||t == "3:02 PM"||t == "3:00 PM"||t == "2:59 PM"||t == "2:36 PM"||t == "2:38 PM"||t == "2:40 PM") && runCheck == false){
-   while (val == 0 && timeSafety <= 7000){
+    
       val = digitalRead(IR);
-      ff.write(63);
-      Serial.println("Feeding...");
-      timeSafety = timeSafety + 1;
-      Serial.println(timeSafety);
-      delay(1);
-      }
-      delay(350);
-      ff.write(90);
-      timeSafety = 0;
-      delay(4000);
-      val = digitalRead(IR);
-      if(val == 1){
+      if(val == HIGH){
         flapSafety = 1;
       }
       else{
         flapSafety = 0;
       }
+    //if(minute(local) % 2 == 0){
+    if((t == "8:00 AM" ||t == "4:00 PM") && runCheck == false){
+    //if((t == "2:32 PM" ||t == "3:02 PM"||t == "3:00 PM"||t == "2:59 PM"||t == "2:36 PM"||t == "2:38 PM"||t == "2:40 PM") && runCheck == false){
+    val = LOW;
+     while (val == LOW && timeSafety <= 7000){
+        val = digitalRead(IR);
+        ff.write(63);
+        Serial.println("Feeding...");
+        timeSafety++;
+        Serial.println(timeSafety);
+        delay(1);
+      }
+      delay(350);
+      ff.write(90);
+      timeSafety = 0;
+      delay(4000);
       /*
       ff.write(63);
       delay(250);
@@ -331,5 +333,7 @@ void checkRealtime(){
     else{
     ff.write(90);
     Serial.println(t);
-    runCheck = false;}
+    runCheck = false;
+    }
+    
 }
