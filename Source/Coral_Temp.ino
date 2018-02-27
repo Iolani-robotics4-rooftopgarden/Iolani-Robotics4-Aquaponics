@@ -18,10 +18,10 @@ Project: RoofTopGarden */
 
 
 
-#define ID1 "5a1cb427c03f977744cac01e" // temp sensor
-#define TOKEN "wMsN7QrhT5d60a5WtHejmyxg9cbnnj" // Put here your Ubidots TOKEN
-#define WIFISSID "Palila"
-#define PASSWORD "io71redbird51"
+#define ID1 "place sensor ID here" // temp sensor
+#define TOKEN "place Ubidots token here" // Put here your Ubidots TOKEN
+#define WIFISSID "place WiFi name here"
+#define PASSWORD "place WiFi password here"
 #define ONE_WIRE_BUS D1
 
 
@@ -40,7 +40,7 @@ float value;
 /*
 // The ID below comes from Google Sheets.
 // Towards the bottom of this page, it will explain how this can be obtained
-const char *GScriptId = "AKfycbyADaLgXg7z5jGJZCI5vA0eaqvZslhVr2qLIveNxy4ULRgCpb40";
+const char *GScriptId = "place google sheets script ID here";
 
 // Push data on this interval
 const int dataPostDelay = 300000; 
