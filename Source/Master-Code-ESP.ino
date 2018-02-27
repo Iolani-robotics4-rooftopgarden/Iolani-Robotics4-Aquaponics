@@ -36,13 +36,13 @@ const char * days[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "
 const char * months[] = {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"} ;
 const char * ampm[] = {"AM", "PM"} ;
 
-#define ID1 "5890e3fc76254253b40c38b5" // temp sensor
-#define ID2 "588baa1e762542036842ef85" // float sensor
-#define ID3 "5890e63476254253b40c4d2c" //fishfeeder
-#define ID4 "589e1b3e76254210a06ba5db" // ...
-#define TOKEN "wemRu3qNO3DyZHDLKkNMhQboTOXH3O" // Put here your Ubidots TOKEN
-#define WIFISSID "Palila"
-#define PASSWORD "io71redbird51"
+#define ID1 "place sensor ID here" // temp sensor
+#define ID2 "place sensor ID here" // float sensor
+#define ID3 "place sensor ID here" //fishfeeder
+#define ID4 "place sensor ID here" // ...
+#define TOKEN "place Ubidots token here" // Put here your Ubidots TOKEN
+#define WIFISSID "place WiFi name here"
+#define PASSWORD "place WiFi password here"
 #define ONE_WIRE_BUS D1
 #define SensorPin A0
 
@@ -82,7 +82,7 @@ int val;
 
 // The ID below comes from Google Sheets.
 // Towards the bottom of this page, it will explain how this can be obtained
-const char *GScriptId = "AKfycbyADaLgXg7z5jGJZCI5vA0eaqvZslhVr2qLIveNxy4ULRgCpb40";
+const char *GScriptId = "place google sheets script ID here";
 
 // Push data on this interval
 const int dataPostDelay = 300000; 
