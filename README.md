@@ -44,5 +44,18 @@ After installing the libraries needed and the Arduino IDE, open the IDE and keep
 * Go to Sketch > Include Library > Add .zip Library
 * Drag the library folder from your desktop into the library folder that was just opened 
 * Close the folder and the IDE is ready to go
+### Coding
+Once you have set up the IDE for the esp8266, follow the steps bellow to program the microcontroller:
+#### Changing the Code
+* Copy and Paste the code in the Master-Code-ESP.ino, that can be found in the Source folder on this GitHub, into the Arduino IDE
+* Change the ID1, ID2, ID3, and ID4 tokens based on the ID tokens that is in Ubidots
+* Change the WIFISSID to the name of the WiFi router
+* Change the PASSWORD to the passwrod of the WiFi router
+#### Uploading the Code
+Once the steps from above have been followed and done, follow these steps to upload the code onto the esp8266:
+* Plug in the esp8266 into the computer by using a USB to microUSB connector
+* Go to Tools > Port > choose the port that the USB is plugged into (normally it would be the only port that shows up if there is nothing else plugged into the computer except for the USB connected to the esp8266)
+* Press the arrow on the top right corner that is pointing toward the right (this is the upload button that is used to upload code onto the board; The check mark icon is to verify your code just incase something is wrong)
+
 
 
