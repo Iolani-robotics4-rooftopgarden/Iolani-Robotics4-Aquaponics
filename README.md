@@ -32,4 +32,10 @@ Here is the libraries needed in order to use the code:
 * [Servo Library](https://github.com/arduino-libraries/Servo)
 
 ### Installing
+After installing the libraries needed and the Arduino IDE, open the IDE and keep the libraries on the desktop. Once the IDE is open, these are the steps to downloading the board and placing the libraries into the IDE. 
+#### Getting the Board onto the IDE
+* Go to File > Prefrences
+* Copy the url and place it into the Additional Boards Manager URLs box. (Copy this URL http://arduino.esp8266.com/stable/package_esp8266com_index.json)
+* Go to Tools > Board > Boards Manager 
+* In the search box, look for 
 
