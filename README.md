@@ -44,7 +44,7 @@ After installing the libraries needed and the Arduino IDE, open the IDE and keep
 * Go to Sketch > Include Library > Add .zip Library
 * Drag the library folder from your desktop into the library folder that was just opened 
 * Close the folder and the IDE is ready to go
-### Coding
+### Coding (For the esp8266)
 Once you have set up the IDE for the esp8266, follow the steps bellow to program the microcontroller:
 #### Changing the Code
 * Copy and Paste the code in the Master-Code-ESP.ino, that can be found in the Source folder on this GitHub, into the Arduino IDE
