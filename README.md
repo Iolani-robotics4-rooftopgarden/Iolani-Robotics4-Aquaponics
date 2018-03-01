@@ -35,7 +35,14 @@ Here is the libraries needed in order to use the code:
 After installing the libraries needed and the Arduino IDE, open the IDE and keep the libraries on the desktop. Once the IDE is open, these are the steps to downloading the board and placing the libraries into the IDE. 
 #### Getting the Board onto the IDE
 * Go to File > Prefrences
-* Copy the url and place it into the Additional Boards Manager URLs box. (Copy this URL http://arduino.esp8266.com/stable/package_esp8266com_index.json)
+* Copy the url and place it into the Additional Boards Manager URLs box.                                                                   (Copy this URL http://arduino.esp8266.com/stable/package_esp8266com_index.json)
+* Press OK 
 * Go to Tools > Board > Boards Manager 
-* In the search box, look for 
+* In the search box, type ESP8266
+* Click on box and then click on the install button (the installation process may take a couple of minutes depending on your WiFi)
+#### Getting the Libraries onto the IDE
+* Go to Sketch > Include Library > Add .zip Library
+* Drag the library folder from your desktop into the library folder that was just opened 
+* Close the folder and the IDE is ready to go
+
 
