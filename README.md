@@ -16,7 +16,7 @@ These are the supplies needed to recreate this project:
 * RTC "Real Time Clock" which can be found here: [RTC](https://www.amazon.com/DS3231-AT24C32-module-precision-Arduino/dp/B00HCB7VYS)
 
 ### Prerequisites
-  For an IoT (Internet of Things) interface, we [Ubidots](https://ubidots.com/) to create a platform for the ESP8266 to send and receive
+  For an IoT (Internet of Things) interface, we use [Ubidots](https://ubidots.com/) to create a platform for the ESP8266 to send and receive
 data from. This website allows you to customize your interface so that data can be shown in graphs or in tables. The website also allows you
 to create  buttons that can be used to send HIGH or LOW values to the device. For example, we used a table to layout the temperatuer data
 and we used a meter that consisted of values 1 - 5 in order to show the water level that the qauaponics system was at. We also used a button
