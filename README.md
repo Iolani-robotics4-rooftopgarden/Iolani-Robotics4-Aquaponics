@@ -55,7 +55,29 @@ Once you have set up the IDE for the esp8266, follow the steps bellow to program
 Once the steps from above have been followed and done, follow these steps to upload the code onto the esp8266:
 * Plug in the esp8266 into the computer by using a USB to microUSB connector
 * Go to Tools > Port > choose the port that the USB is plugged into (normally it would be the only port that shows up if there is nothing else plugged into the computer except for the USB connected to the esp8266)
-* Press the arrow on the top right corner that is pointing toward the right (this is the upload button that is used to upload code onto the board; The check mark icon is to verify your code just incase something is wrong)
+* Press the arrow on the top right corner that is pointing toward the right (this is the upload button that is used to upload code onto the board; The check-mark icon is to verify your code just incase something is wrong)
+### Setting up Ubidots
+Ubidots is an IoT website that allows user to send and receive data to a microcontroller via WiFi or Cellular. This website will be used to gather the temperature and water level from the aquaponics system and that data will be displayed on the Ubidots dashboard. Ubidots is also being used for the fish feeder manual button that will allow users to activate the fish feeder at any specfific time. 
+#### Creating an Account
+Use the following steps to create an account for Ubidots:
+* Go the the [Ubidots](https://app.ubidots.com/accounts/signup/) website
+* Click on "Sign Up"
+* Go through the registering application and the account will be created
+Note that Ubidots has an education platform and a busniness platform. The difference between the two is data storage and the range of widgets that can be used on the dashboard. The education application suits this project the best becuase it is not only free but it allows the user to have an easier time looking at data. 
+#### Connecting the ESP8266 to Ubidots
+In order for the esp8266 to send data to Ubidots, the device must be connected to the users Ubidots account. The following steps will showcase what to do:
+* Click on the option menu on the top right hand corner (looks like three lines stacked ontop of each other)
+* Click on devices and then click on the yellow circle with the plus sign inside of it
+* Name the device whatever suits the project best (For this case, the name given to the device was Rooftop_Garden_io)
+* Once the device is created click on the device block (This block will showcase the the ID for that sepcific device)  
+#### Creating a Variable in Ubidots
+Once the device has been created, the variables will be declared in the device dashboard so that the information coming from the esp8266 can be recieved on Ubidots side. This declaring of variables is so that Ubidots knows what data points are what in when it is received. The following steps will showcase how to do this:
+* Once you are in the designated device's dashboard, click on the "Add Variable" icon on the bottom (choose the default variable and a yellow box will be created)
+* Name the first variable "Temp" (this variable will be for the temperature data)
+* Create three more variables with the names "FloatSensor", "FishFeeder", and "Time"
+* Click on the variables that were just created and the ID's for each variable must be placed in the code for the esp8266 (See the coding section of the document to find where to place these ID's)
+The variables needed for thsi project should all be created after this step
+#### Creating the Dashboard in Ubidots
 
 
 
