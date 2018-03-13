@@ -78,6 +78,27 @@ Once the device has been created, the variables will be declared in the device d
 * Click on the variables that were just created and the ID's for each variable must be placed in the code for the esp8266 (See the coding section of the document to find where to place these ID's)
 The variables needed for thsi project should all be created after this step
 #### Creating the Dashboard in Ubidots
-
+If the variables needed for the dashboard where not created, please see the section above. Once the variables are created for the dashboard, follow the following steps to creating and customizing the dashbaord.
+* Click on the three bar tab on the top right corner of the page and click on Dashbaords
+* Once in the dashbaord, click on the yellow button with the "+" sign in it. This will be where widgets can be added to the dashboard
+* Once in the New Widget page, seven widget options are available to the use
+----------------------------------------------------------------------------
+##### Widget's and What they do
+Each widget being added to the dashboard has its own functions. Here are the seven widgets and what they do:
+* Chart: creates a chart with data points on what variable data it has been receiving. Some of the charts that can be used in this widget are Line, Double axis, Scatter Plot, Histogram, and a Bar chart
+* Metric: creates a display for different kinds of data evaluation. Some of the evaluations are Average, Maximum, Minimum, Sum, Count, and Last value
+* Map: allows users to see where there gps sensor is or a specific location the user puts into the map function
+* Table: creates a table based on the last value received or a table with historical value
+* Indicator: creates an indicator that can be an on/off switch, a gauge, or a tank (liquid)
+* Control: creates a widget that can send data to the Electron or microcontroller being used. This widget is normally used to control a motor or used as an on/off switch on the microcontroller 
+* HTML Canvas: creates a box that can be placed with text using HTML code
+----------------------------------------------------------------------------
+* The widget that are being used is the table widget and select the last value 
+* Add the temperature variable
+* Once done, click finish and the widget is created
+* Create a widget for the float sensor using the gauge widget under the indicator branch
+###### Note: the sensors may ask to select a device. If this happens, select the device name given for the ESP8266
+* Create a widget for the fish feeder using the switch widget under the control branch
+* Once hte widgets have been created, the widgets are ablel to move around the dashboard in order to personlize it for the user. If the user chooses to move the widgets, they must make sure that the dashboard is unlocked (which can be seen using the lock icon). If the dashboard is unlocked, widgets are ablel to move free. But, if the dashboard is locked, widgets will stay in the place they were last put in. 
 
 
