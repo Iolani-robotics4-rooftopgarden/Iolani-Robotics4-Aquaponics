@@ -127,7 +127,7 @@ These are the supplies needed for this portion of the project. If the materials 
 * Arduino
 
 #### Wiring Schematic
-To access the wiring schematic, open the folders on the top of the GitHub labeled Source > Wiring> Schematic
+To access the wiring schematic, open the folders on the top of the GitHub labeled Source > Wiring Schematic
 This will take you to a picture of the wiring for the project
 
 
